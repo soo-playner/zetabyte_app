@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "693640338181",
+    "project_id": "oneclick-ef647",
+    "storage_bucket": "oneclick-ef647.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693640338181:android:1075a5a840866e6d94f56c",
+        "android_client_info": {
+          "package_name": "com.oneClick.webview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693640338181-8v3l0vq3r7ge164pdii3p25qav5bph63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_b4Cbtj7SivelVioNKGDai3hg44pFQ6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693640338181-8v3l0vq3r7ge164pdii3p25qav5bph63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

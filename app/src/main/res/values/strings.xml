@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">ONE CLICK</string>
+    <string name="home">https://oneclick-stock.com</string>
+
+
+
+    <string name="user_agent_suffix"> webview//1.0</string>
+
+    <string name="abc_action_mode_done">Done</string>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_up_description">Navigate up</string>
+    <string name="abc_action_menu_overflow_description">More options</string>
+    <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+    <string name="abc_searchview_description_search">Search</string>
+    <string name="abc_search_hint">Search…</string>
+    <string name="abc_searchview_description_query">Search query</string>
+    <string name="abc_searchview_description_clear">Clear query</string>
+    <string name="abc_searchview_description_submit">Submit query</string>
+    <string name="abc_searchview_description_voice">Voice search</string>
+    <string name="abc_activitychooserview_choose_application">Choose an app</string>
+    <string name="abc_activity_chooser_view_see_all">See all</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_shareactionprovider_share_with">Share with</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="abc_capital_on">ON</string>
+    <string name="abc_capital_off">OFF</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="backbutton">한번 더 뒤로가기 누르면 어플이 종료 됩니다.</string>
+    <string name="errornetwork">네트워크 문제 발생</string>
+    <string name="end_app">한번 더 뒤로가기 누르면 어플이 종료 됩니다.</string>
+    <string name="id_info">*휴대폰 번호 뒤 8자리가 아이디로 사용됩니다.</string>
+
+    <!-- FingerPrint -->
+    <string name="payment_pro"></string>
+
+
+    <string name="cancel">취소</string>
+    <string name="use_password">비밀번호 사용</string>
+    <string name="ok">확인</string>
+    <string name="password">비밀번호</string>
+    <string name="description">인증요청</string>
+    <string name="password_hint">로그인 비밀번호를 입력해주세요</string>
+    <string name="fingerprint_hint">지문을 사용하여 인증 하세요</string>
+    <string name="fingerprint_not_recognized">다시 시도해주세요</string>
+    <string name="fingerprint_success">인증 되었습니다</string>
+    <string name="check_finger_in_device">현재 디바이스에 등록된 지문이 없습니다</string>
+    <!-- alert -->
+    <string name="alert"><b>안내</b></string>
+
+</resources>
