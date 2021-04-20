@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitConnection {
-    String URL = "http://refund.willsoft.kr/";
+    String URL = "https://oneclick-stock.com/";
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(URL)
