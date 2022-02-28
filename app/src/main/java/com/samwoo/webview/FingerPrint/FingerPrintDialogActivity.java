@@ -1,4 +1,4 @@
-package com.oneClick.webview.FingerPrint;
+package com.samwoo.webview.FingerPrint;
 
 import android.graphics.Color;
 import android.app.Activity;
@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
-import com.oneClick.webview.R;
+import com.samwoo.webview.R;
 
 public class FingerPrintDialogActivity extends Activity implements FingerPrintAuthDialogFragment.SecretAuthorize {
 

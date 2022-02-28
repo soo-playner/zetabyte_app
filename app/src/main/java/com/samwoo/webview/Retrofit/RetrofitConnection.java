@@ -1,4 +1,4 @@
-package com.oneClick.webview.Retrofit;
+package com.samwoo.webview.Retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

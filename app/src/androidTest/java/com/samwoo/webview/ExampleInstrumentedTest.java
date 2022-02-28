@@ -1,4 +1,4 @@
-package com.oneClick.webview;
+package com.samwoo.webview;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

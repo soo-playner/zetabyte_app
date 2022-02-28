@@ -1,4 +1,4 @@
-package com.oneClick.webview.Retrofit;
+package com.samwoo.webview.Retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

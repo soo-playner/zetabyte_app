@@ -1,4 +1,4 @@
-package com.oneClick.webview;
+package com.samwoo.webview;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,13 +30,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.oneClick.webview.FingerPrint.FingerPrintDialogActivity;
-import com.oneClick.webview.QrScan.QrScannerActivity;
+import com.samwoo.webview.FingerPrint.FingerPrintDialogActivity;
+import com.samwoo.webview.QrScan.QrScannerActivity;
 
 
-import com.oneClick.webview.Retrofit.RetrofitConnection;
-import com.oneClick.webview.Retrofit.retrofitData;
-import com.oneClick.webview.SharedPreferences.PreferenceManager;
+import com.samwoo.webview.Retrofit.RetrofitConnection;
+import com.samwoo.webview.Retrofit.retrofitData;
+import com.samwoo.webview.SharedPreferences.PreferenceManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.dynamiclinks.DynamicLink;

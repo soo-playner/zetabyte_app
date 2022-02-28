@@ -1,4 +1,4 @@
-package com.oneClick.webview.FingerPrint;
+package com.samwoo.webview.FingerPrint;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -24,10 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oneClick.webview.R;
-import com.oneClick.webview.Retrofit.RetrofitConnection;
-import com.oneClick.webview.Retrofit.retrofitData;
-import com.oneClick.webview.SharedPreferences.PreferenceManager;
+import com.samwoo.webview.R;
+import com.samwoo.webview.Retrofit.RetrofitConnection;
+import com.samwoo.webview.Retrofit.retrofitData;
+import com.samwoo.webview.SharedPreferences.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,4 +1,4 @@
-package com.oneClick.webview.QrScan;
+package com.samwoo.webview.QrScan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.ViewGroup;
 
-import com.oneClick.webview.R;
+import com.samwoo.webview.R;
 import com.google.zxing.Result;
 
 

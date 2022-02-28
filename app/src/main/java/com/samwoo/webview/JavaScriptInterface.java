@@ -1,4 +1,4 @@
-package com.oneClick.webview;
+package com.samwoo.webview;
 
 import android.util.Log;
 import android.webkit.JavascriptInterface;

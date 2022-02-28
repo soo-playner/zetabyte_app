@@ -1,4 +1,4 @@
-package com.oneClick.webview.SharedPreferences;
+package com.samwoo.webview.SharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

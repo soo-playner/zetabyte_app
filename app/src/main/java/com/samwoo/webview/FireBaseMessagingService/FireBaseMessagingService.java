@@ -1,4 +1,4 @@
-package com.oneClick.webview.FireBaseMessagingService;
+package com.samwoo.webview.FireBaseMessagingService;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,9 +12,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
-import com.oneClick.webview.MainActivity;
-import com.oneClick.webview.R;
-import com.oneClick.webview.SharedPreferences.PreferenceManager;
+import com.samwoo.webview.MainActivity;
+import com.samwoo.webview.R;
+import com.samwoo.webview.SharedPreferences.PreferenceManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

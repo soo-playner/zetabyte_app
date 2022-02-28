@@ -1,4 +1,4 @@
-package com.oneClick.webview.Retrofit;
+package com.samwoo.webview.Retrofit;
 
 public class retrofitData {
     String userId,fcmToken,result;

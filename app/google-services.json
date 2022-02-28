@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "693640338181",
-    "project_id": "oneclick-ef647",
-    "storage_bucket": "oneclick-ef647.appspot.com"
+    "project_number": "158406625123",
+    "project_id": "samwoo-5b8a5",
+    "storage_bucket": "samwoo-5b8a5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:693640338181:android:1075a5a840866e6d94f56c",
+        "mobilesdk_app_id": "1:158406625123:android:f887ef198f4a7fc9177556",
         "android_client_info": {
-          "package_name": "com.oneClick.webview"
+          "package_name": "com.samwoo.webview"
         }
       },
       "oauth_client": [
         {
-          "client_id": "693640338181-8v3l0vq3r7ge164pdii3p25qav5bph63.apps.googleusercontent.com",
+          "client_id": "158406625123-1q7pe4a4ptpuajl1gduuseidcroulc5r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_b4Cbtj7SivelVioNKGDai3hg44pFQ6M"
+          "current_key": "AIzaSyCbuMLRFZq1cmZKU7O4pUUwos5kcr2PfqA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "693640338181-8v3l0vq3r7ge164pdii3p25qav5bph63.apps.googleusercontent.com",
+              "client_id": "158406625123-1q7pe4a4ptpuajl1gduuseidcroulc5r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
