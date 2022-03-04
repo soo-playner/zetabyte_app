@@ -1,4 +1,4 @@
-package com.samwoo.webview.FingerPrint;
+package com.zetabyte.webview.FingerPrint;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.samwoo.webview.R;
+import com.zetabyte.webview.R;
 
 
 /**

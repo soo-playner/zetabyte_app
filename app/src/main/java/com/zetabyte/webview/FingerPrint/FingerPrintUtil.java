@@ -1,4 +1,4 @@
-package com.samwoo.webview.FingerPrint;
+package com.zetabyte.webview.FingerPrint;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.samwoo.webview;
+package com.zetabyte.webview;
 
 public interface MainToJavaScriptInterfaceData {
     void moveToFingerPrintDialogActivity(boolean check);

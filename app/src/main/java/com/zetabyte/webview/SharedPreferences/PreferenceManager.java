@@ -1,4 +1,4 @@
-package com.samwoo.webview.SharedPreferences;
+package com.zetabyte.webview.SharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

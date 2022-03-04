@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "158406625123",
-    "project_id": "samwoo-5b8a5",
-    "storage_bucket": "samwoo-5b8a5.appspot.com"
+    "project_number": "863778661643",
+    "project_id": "zetabyte-ea117",
+    "storage_bucket": "zetabyte-ea117.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:158406625123:android:f887ef198f4a7fc9177556",
+        "mobilesdk_app_id": "1:863778661643:android:c14be475913bfb1c742e0e",
         "android_client_info": {
-          "package_name": "com.samwoo.webview"
+          "package_name": "com.zetabyte.webview"
         }
       },
       "oauth_client": [
         {
-          "client_id": "158406625123-1q7pe4a4ptpuajl1gduuseidcroulc5r.apps.googleusercontent.com",
+          "client_id": "863778661643-tgqhjf20j0d07r417th8rqtd353b4dh9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbuMLRFZq1cmZKU7O4pUUwos5kcr2PfqA"
+          "current_key": "AIzaSyAmTJT8FopyT6EvlLtsGwnoMiQdXvqPEfQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "158406625123-1q7pe4a4ptpuajl1gduuseidcroulc5r.apps.googleusercontent.com",
+              "client_id": "863778661643-tgqhjf20j0d07r417th8rqtd353b4dh9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

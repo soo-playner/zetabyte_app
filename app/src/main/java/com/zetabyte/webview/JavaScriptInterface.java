@@ -1,4 +1,4 @@
-package com.samwoo.webview;
+package com.zetabyte.webview;
 
 import android.util.Log;
 import android.webkit.JavascriptInterface;

@@ -1,4 +1,4 @@
-package com.samwoo.webview;
+package com.zetabyte.webview;
 
 import org.junit.Test;
 
