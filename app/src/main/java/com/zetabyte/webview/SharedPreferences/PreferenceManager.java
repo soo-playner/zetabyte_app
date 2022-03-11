@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class PreferenceManager {
 
-    public static final String PREFERENCES_NAME = "goldentime";
+    public static final String PREFERENCES_NAME = "zetabyte";
     private static final String DEFAULT_VALUE_STRING = "";
     private static final boolean DEFAULT_VALUE_BOOLEAN = false;
     private static final int DEFAULT_VALUE_INT = -1;

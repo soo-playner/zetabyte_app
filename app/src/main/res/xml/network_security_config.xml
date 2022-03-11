@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">samwoosys.co.kr</domain>
+        <domain includeSubdomains="true">zetabyte.ai</domain>
     </domain-config>
 </network-security-config>
 
