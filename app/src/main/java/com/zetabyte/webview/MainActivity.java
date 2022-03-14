@@ -29,36 +29,42 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+
 import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.firebase.dynamiclinks.ShortDynamicLink;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+
+
 import com.zetabyte.webview.FingerPrint.FingerPrintDialogActivity;
 import com.zetabyte.webview.QrScan.QrScannerActivity;
-
-
 import com.zetabyte.webview.Retrofit.RetrofitConnection;
 import com.zetabyte.webview.Retrofit.retrofitData;
 import com.zetabyte.webview.SharedPreferences.PreferenceManager;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
+
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
+
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         webView = (WebView) findViewById(R.id.webView);
 
         WebSettings webSettings = webView.getSettings();
+
 
         webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); // 팝업
@@ -124,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         });
         getNumber();
         handleDeepLink();
+        checkForAppUpdate();
     }
 
 
@@ -135,19 +143,33 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_FINGER_PRINT_CODE) {  // finger print
-                String getFingerPrintResult = "OK";
-                Log.d("TAG", "getFingerPrintResult: " + getFingerPrintResult);
-                webView.loadUrl("javascript:getFingerPrintResult('" + getFingerPrintResult + "')");
-            }
 
-            if (requestCode == REQUEST_QR_SCANNER_CODE) {  // qr scanner
-                String getQrScannerResult = data.getStringExtra("QrScannerResult");
-                Log.d("TAG", "QrScannerResult: " + getQrScannerResult);
-                webView.loadUrl("javascript:getQrScannerResult('" + getQrScannerResult + "')");
-            }
+        switch (requestCode) {
+
+            case REQ_CODE_VERSION_UPDATE: // version update
+                if (resultCode != RESULT_OK) { //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
+                    Log.d( "TAG", "Update flow failed! Result code: " + resultCode);
+                    unregisterInstallStateUpdListener();
+                }
+
+                break;
+
+            case REQUEST_FINGER_PRINT_CODE: // finger print
+                if (resultCode == RESULT_OK) {
+                    String getFingerPrintResult = "OK";
+                    Log.d("TAG", "getFingerPrintResult: " + getFingerPrintResult);
+                    webView.loadUrl("javascript:getFingerPrintResult('" + getFingerPrintResult + "')");
+                }
+
+            case REQUEST_QR_SCANNER_CODE:   // qr scanner
+                if (resultCode == RESULT_OK) {
+                    String getQrScannerResult = data.getStringExtra("QrScannerResult");
+                    Log.d("TAG", "QrScannerResult: " + getQrScannerResult);
+                    webView.loadUrl("javascript:getQrScannerResult('" + getQrScannerResult + "')");
+                }
+
         }
+
     }
 
     @Override
@@ -425,11 +447,14 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         }
     }
 
+
+
     /**
+    *  마켓버전 비교 업데이트
     *  마켓버전 비교 업데이트
     * */
 
-    private static final int REQ_CODE_VERSION_UPDATE = 530;
+    private static final int REQ_CODE_VERSION_UPDATE = 3104;
     private AppUpdateManager appUpdateManager;
     private InstallStateUpdatedListener installStateUpdatedListener;
 
@@ -441,32 +466,6 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        checkForAppUpdate();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, final int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        switch (requestCode) {
-
-            case REQ_CODE_VERSION_UPDATE:
-                if (resultCode != RESULT_OK) { //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
-                    L.d("Update flow failed! Result code: " + resultCode);
-                    // If the update is cancelled or fails,
-                    // you can request to start the update again.
-                    unregisterInstallStateUpdListener();
-                }
-
-                break;
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         unregisterInstallStateUpdListener();
         super.onDestroy();
@@ -474,11 +473,12 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
 
 
     private void checkForAppUpdate() {
-        // Creates instance of the manager.
-        appUpdateManager = AppUpdateManagerFactory.create(AppCustom.getAppContext());
 
-        // Returns an intent object that you use to check for an update.
-        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        // 앱 업데이트 매니저 초기화
+        appUpdateManager = AppUpdateManagerFactory.create(context);
+
+        // 업데이트를 체크하는데 사용되는 인텐트를 리턴한다.
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         // Create a listener to track request state updates.
         installStateUpdatedListener = new InstallStateUpdatedListener() {
@@ -514,10 +514,12 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         try {
             appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
+                    // 'AppUpdateType.FLEXIBLE': 사용자에게 업데이트 여부를 물은 후 업데이트 실행 가능
+                    // 'AppUpdateType.IMMEDIATE': 사용자가 수락해야만 하는 업데이트 창을 보여줌
                     AppUpdateType.IMMEDIATE,
-                    // The current activity making the update request.
+                    // 현재 업데이트 요청을 만든 액티비티, 여기선 MainActivity.
                     this,
-                    // Include a request code to later monitor this update request.
+                    // onActivityResult 에서 사용될 REQUEST_CODE.
                     MainActivity.REQ_CODE_VERSION_UPDATE);
         } catch (IntentSender.SendIntentException e) {
             e.printStackTrace();
@@ -545,14 +547,17 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
      */
     private void popupSnackbarForCompleteUpdateAndUnregister() {
         Snackbar snackbar =
-                Snackbar.make(drawerLayout, getString(R.string.update_downloaded), Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction(R.string.restart, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                Snackbar.make(
+                        findViewById(R.id.CoordinatorLayout_main),
+                        "New app is ready!",
+                        Snackbar.LENGTH_INDEFINITE);
+
+        snackbar.setAction("Install", view -> {
+            if (appUpdateManager != null){
                 appUpdateManager.completeUpdate();
             }
         });
-        snackbar.setActionTextColor(getResources().getColor(R.color.action_color));
+        snackbar.setActionTextColor(getResources().getColor(R.color.install_color));
         snackbar.show();
 
         unregisterInstallStateUpdListener();

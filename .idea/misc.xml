@@ -6,6 +6,13 @@
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/drawable/splash.xml" value="0.346" />
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.31" />
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/mipmap-anydpi-v26/logo_round.xml" value="0.31" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/activity_finger_print_dialog.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/activity_main.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/activity_qr_scanner.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_backup.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_container.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_content.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/popup_activity.xml" value="0.2708333333333333" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.297" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable/dialog_bg.xml" value="0.338" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable/ic_fingerprint_error.xml" value="0.297" />
@@ -24,7 +31,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

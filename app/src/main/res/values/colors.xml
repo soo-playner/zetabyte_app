@@ -7,4 +7,5 @@
 <color name="success_color">#009688</color>
 <color name="warning_color">#f4511e</color>
 <color name="black_color">#000000</color>
+    <color name="install_color">#c73bda</color>
 </resources>
