@@ -27,6 +27,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
@@ -67,8 +74,11 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     private WebView webView;
     private static final int REQUEST_FINGER_PRINT_CODE = 999;
     private static final int REQUEST_QR_SCANNER_CODE = 888;
+    private static final int REQUEST_CODE = 366;
+    private AppUpdateManager appUpdateManager;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +123,40 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         });
         getNumber();
         handleDeepLink();
+
+        // 앱 업데이트 매니저 초기화
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+
+        // 업데이트를 체크하는데 사용되는 인텐트를 리턴한다.
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> { // appUpdateManager이 추가되는데 성공하면 발생하는 이벤트
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE // UpdateAvailability.UPDATE_AVAILABLE == 2 이면 앱 true
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) { // 허용된 타입의 앱 업데이트이면 실행 (AppUpdateType.IMMEDIATE || AppUpdateType.FLEXIBLE)
+                // 업데이트가 가능하고, 상위 버전 코드의 앱이 존재하면 업데이트를 실행한다.
+                requestUpdate (appUpdateInfo);
+            }
+        });
+    }
+
+    // 업데이트 요청
+    private void requestUpdate (AppUpdateInfo appUpdateInfo) {
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                    // 'getAppUpdateInfo()' 에 의해 리턴된 인텐트
+                    appUpdateInfo,
+                    // 'AppUpdateType.FLEXIBLE': 사용자에게 업데이트 여부를 물은 후 업데이트 실행 가능
+                    // 'AppUpdateType.IMMEDIATE': 사용자가 수락해야만 하는 업데이트 창을 보여줌
+                    AppUpdateType.IMMEDIATE,
+                    // 현재 업데이트 요청을 만든 액티비티, 여기선 MainActivity.
+                    this,
+                    // onActivityResult 에서 사용될 REQUEST_CODE.
+                    REQUEST_CODE);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onBackPressed() {
@@ -123,19 +167,68 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_FINGER_PRINT_CODE) {  // finger print
-                String getFingerPrintResult = "OK";
-                Log.d("TAG", "getFingerPrintResult: " + getFingerPrintResult);
-                webView.loadUrl("javascript:getFingerPrintResult('" + getFingerPrintResult + "')");
-            }
 
-            if (requestCode == REQUEST_QR_SCANNER_CODE) {  // qr scanner
-                String getQrScannerResult = data.getStringExtra("QrScannerResult");
-                Log.d("TAG", "QrScannerResult: " + getQrScannerResult);
-                webView.loadUrl("javascript:getQrScannerResult('" + getQrScannerResult + "')");
+        if (requestCode == REQUEST_CODE) {
+            Toast myToast = Toast.makeText(this.getApplicationContext(), "MY_REQUEST_CODE", Toast.LENGTH_SHORT);
+            myToast.show();
+
+            // 업데이트가 성공적으로 끝나지 않은 경우
+            if (resultCode != RESULT_OK) {
+                Log.d("tag", "Update flow failed! Result code: " + resultCode);
+                // 업데이트가 취소되거나 실패하면 업데이트를 다시 요청할 수 있다.,
+                // 업데이트 타입을 선택한다 (IMMEDIATE || FLEXIBLE).
+                com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+                appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                            // flexible한 업데이트를 위해서는 AppUpdateType.FLEXIBLE을 사용한다.
+                            && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                        // 업데이트를 다시 요청한다.
+                        requestUpdate (appUpdateInfo);
+                    }
+                });
+            }
+        }else {
+            if (resultCode == RESULT_OK) {
+                if (requestCode == REQUEST_FINGER_PRINT_CODE) {  // finger print
+                    String getFingerPrintResult = "OK";
+                    Log.d("TAG", "getFingerPrintResult: " + getFingerPrintResult);
+                    webView.loadUrl("javascript:getFingerPrintResult('" + getFingerPrintResult + "')");
+                }
+
+                if (requestCode == REQUEST_QR_SCANNER_CODE) {  // qr scanner
+                    String getQrScannerResult = data.getStringExtra("QrScannerResult");
+                    Log.d("TAG", "QrScannerResult: " + getQrScannerResult);
+                    webView.loadUrl("javascript:getQrScannerResult('" + getQrScannerResult + "')");
+                }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        appUpdateManager
+                .getAppUpdateInfo()
+                .addOnSuccessListener(
+                        appUpdateInfo -> {
+                            if (appUpdateInfo.updateAvailability()
+                                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                                // If an in-app update is already running, resume the update.
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            AppUpdateType.IMMEDIATE,
+                                            this,
+                                            REQUEST_CODE);
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
     }
 
     @Override
