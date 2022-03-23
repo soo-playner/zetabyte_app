@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 
@@ -84,6 +85,21 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 앱 업데이트 매니저 초기화
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+
+        // 업데이트를 체크하는데 사용되는 인텐트를 리턴한다.
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> { // appUpdateManager이 추가되는데 성공하면 발생하는 이벤트
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE // UpdateAvailability.UPDATE_AVAILABLE == 2 이면 앱 true
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) { // 허용된 타입의 앱 업데이트이면 실행 (AppUpdateType.IMMEDIATE || AppUpdateType.FLEXIBLE)
+                // 업데이트가 가능하고, 상위 버전 코드의 앱이 존재하면 업데이트를 실행한다.
+                requestUpdate (appUpdateInfo);
+            }
+        });
+
         webView = (WebView) findViewById(R.id.webView);
 
         WebSettings webSettings = webView.getSettings();
@@ -124,20 +140,7 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         getNumber();
         handleDeepLink();
 
-        // 앱 업데이트 매니저 초기화
-        appUpdateManager = AppUpdateManagerFactory.create(this);
 
-        // 업데이트를 체크하는데 사용되는 인텐트를 리턴한다.
-        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-
-        // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> { // appUpdateManager이 추가되는데 성공하면 발생하는 이벤트
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE // UpdateAvailability.UPDATE_AVAILABLE == 2 이면 앱 true
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) { // 허용된 타입의 앱 업데이트이면 실행 (AppUpdateType.IMMEDIATE || AppUpdateType.FLEXIBLE)
-                // 업데이트가 가능하고, 상위 버전 코드의 앱이 존재하면 업데이트를 실행한다.
-                requestUpdate (appUpdateInfo);
-            }
-        });
     }
 
     // 업데이트 요청
