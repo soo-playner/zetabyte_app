@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     public static final int IMAGE_SELECTOR_REQ = 1;
     private ValueCallback mFilePathCallback;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,11 +158,11 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
         getNumber();
         handleDeepLink();
 
+
     }
 
     // 업데이트 요청
     private void requestUpdate (AppUpdateInfo appUpdateInfo) {
-        Log.d("tag","requestUpdate");
         try {
             appUpdateManager.startUpdateFlowForResult(
                     // 'getAppUpdateInfo()' 에 의해 리턴된 인텐트
