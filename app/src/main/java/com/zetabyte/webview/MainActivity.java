@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     private static final int REQUEST_QR_SCANNER_CODE = 888;
     private static final int REQUEST_CODE = 366;
     private AppUpdateManager appUpdateManager;
+    public static final int IMAGE_SELECTOR_REQ = 1;
+    private ValueCallback mFilePathCallback;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
@@ -136,6 +139,21 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
                 return true;
             }
         });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback filePathCallback, FileChooserParams fileChooserParams) {
+                mFilePathCallback = filePathCallback;
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+
+                // 여러장의 사진을 선택하는 경우
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/*");
+
+                startActivityForResult(Intent.createChooser(intent, "Select picture"), IMAGE_SELECTOR_REQ);
+                return true;
+            }
+        });
         getNumber();
         handleDeepLink();
 
@@ -170,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d("tag", "request code: " + requestCode);
+
         if (requestCode == REQUEST_CODE) {
             Toast myToast = Toast.makeText(this.getApplicationContext(), "MY_REQUEST_CODE", Toast.LENGTH_SHORT);
             myToast.show();
@@ -190,7 +210,22 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
                     }
                 });
             }
-        }else {
+        }else if(requestCode == IMAGE_SELECTOR_REQ){
+            if (resultCode == RESULT_OK) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    Uri[] uris = new Uri[count];
+                    for (int i = 0; i < count; i++) {
+                        uris[i] = data.getClipData().getItemAt(i).getUri();
+                    }
+                    mFilePathCallback.onReceiveValue(uris);
+                }
+                else if (data.getData() != null) {
+                    mFilePathCallback.onReceiveValue((new Uri[]{data.getData()}));
+                }
+            }
+
+        } {
             if (resultCode == RESULT_OK) {
                 if (requestCode == REQUEST_FINGER_PRINT_CODE) {  // finger print
                     String getFingerPrintResult = "OK";
@@ -205,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements MainToJavaScriptI
                 }
             }
         }
+
     }
 
     @Override
