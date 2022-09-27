@@ -6,6 +6,17 @@
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/drawable/splash.xml" value="0.346" />
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.31" />
         <entry key="..\:/StudioProjects/zetabyte_app/app/src/main/res/mipmap-anydpi-v26/logo_round.xml" value="0.31" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2675" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable/dialog_bg.xml" value="0.3035" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable/fingerprint.xml" value="0.3035" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.345" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable/logo_background.xml" value="0.2675" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/drawable/splash.xml" value="0.2675" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/activity_finger_print_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/activity_qr_scanner.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_backup.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_container.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Administrator/StudioProjects/zetabyte_app/app/src/main/res/layout/fingerprint_dialog_content.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.297" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable/dialog_bg.xml" value="0.338" />
         <entry key="..\:/Users/soo/StudioProjects/samwoo_app/app/src/main/res/drawable/ic_fingerprint_error.xml" value="0.297" />
